@@ -42,3 +42,8 @@ cd aws && terraform init && terraform plan    # review costs first
 - instance/machine type is not on the free-tier/lab allowlist.
 
 `terraform destroy` right after each lab session: `scripts/destroy-lab.sh`.
+
+## Evidence (real run)
+
+![cli-drills](docs/screenshots/shot-drills.png)
+![cost-guard](docs/screenshots/shot-cost-guard.png)
