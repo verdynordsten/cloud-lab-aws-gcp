@@ -46,8 +46,9 @@ for r in google_compute_network google_compute_instance google_storage_bucket go
 done
 
 echo "[5] cli-drills dry-run (default prints, never calls aws)"
-if ./aws/cli-drills.sh | grep -q "dry-run: aws sts"; then ok "dry-run default"; else bad "dry-run default"; fi
-if ./aws/cli-drills.sh | grep -q "describe-instances"; then ok "ec2 drill"; else bad "ec2 drill"; fi
+out="$(./aws/cli-drills.sh 2>/dev/null)"
+if grep -q "dry-run: aws sts" <<<"$out"; then ok "dry-run default"; else bad "dry-run default"; fi
+if grep -q "describe-instances" <<<"$out"; then ok "ec2 drill"; else bad "ec2 drill"; fi
 
 echo "[6] cost guard blocks by default, allows with ack"
 if ./scripts/cost-guard.sh aws 2>/dev/null; then bad "guard blocks w/o ack"; else ok "guard blocks w/o ack"; fi
